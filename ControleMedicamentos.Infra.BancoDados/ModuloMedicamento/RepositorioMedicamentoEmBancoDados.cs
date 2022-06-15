@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
 {
-    internal class RepositorioMedicamentoEmBancoDados
+    public class RepositorioMedicamentoEmBancoDados
     {
 
         private const string enderecoBanco = @"Data Source=(LOCALDB)\MSSQLLOCALDB;Initial Catalog=ControleMedicamentosDB;Integrated Security=True";
@@ -81,7 +81,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
                 WHERE 
                     TBM.ID = @ID";
 
-        public ValidationResult Insert(Medicamento novoMedicamente)
+        public ValidationResult Inserir(Medicamento novoMedicamente)
         {
             var validador = new MedicamentoValidator();
             var resultadoValidacao = validador.Validate(novoMedicamente);

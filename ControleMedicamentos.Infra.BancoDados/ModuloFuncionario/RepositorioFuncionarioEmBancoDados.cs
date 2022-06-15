@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ControleMedicamentos.Infra.BancoDados.ModuloFuncionario
 {
-    internal class RepositorioFuncionarioEmBancoDados
+    public class RepositorioFuncionarioEmBancoDados
     {
         private const string enderecoBanco = @"Data Source=(LOCALDB)\MSSQLLOCALDB;Initial Catalog=ControleMedicamentosDB;Integrated Security=True";
 
@@ -58,13 +58,13 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFuncionario
                     [LOGIN],
                     [SENHA]
 	            FROM 
-		            [TBPACIENTE]
+		            [TBFUNCIONARIO]
 		        WHERE
                     [ID] = @ID";
 
         #endregion
 
-        public ValidationResult Insert(Funcionario novoFuncionario)
+        public ValidationResult Inserir(Funcionario novoFuncionario)
         {
             var validador = new FuncionarioValidator();
             var resultadoValidacao = validador.Validate(novoFuncionario);
@@ -130,12 +130,12 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFuncionario
             SqlCommand comandoSelecao = new SqlCommand(sqlSelecionarTodos, conexaoComBanco);
             conexaoComBanco.Open();
 
-            SqlDataReader leitorPaciente = comandoSelecao.ExecuteReader();
+            SqlDataReader leitorFuncionario = comandoSelecao.ExecuteReader();
 
             List<Funcionario> pacientes = new List<Funcionario>();
 
-            while (leitorPaciente.Read())
-                pacientes.Add(ConverterParFuncionario(leitorPaciente));
+            while (leitorFuncionario.Read())
+                pacientes.Add(ConverterParFuncionario(leitorFuncionario));
 
             conexaoComBanco.Close();
 
@@ -164,18 +164,18 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFuncionario
 
         private void ConfigurarParametros(Funcionario novoFuncionario, SqlCommand comandoInsercao)
         {
-            comandoInsercao.Parameters.AddWithValue("ID", novoFuncionario.Id);
-            comandoInsercao.Parameters.AddWithValue("NOME", novoFuncionario.Nome);
-            comandoInsercao.Parameters.AddWithValue("LOGIN", novoFuncionario.Login);
-            comandoInsercao.Parameters.AddWithValue("SENHA", novoFuncionario.Senha);
+            comandoInsercao.Parameters.AddWithValue("@ID", novoFuncionario.Id);
+            comandoInsercao.Parameters.AddWithValue("@NOME", novoFuncionario.Nome);
+            comandoInsercao.Parameters.AddWithValue("@LOGIN", novoFuncionario.Login);
+            comandoInsercao.Parameters.AddWithValue("@SENHA", novoFuncionario.Senha);
         }
 
-        private Funcionario ConverterParFuncionario(SqlDataReader leitorPaciente)
+        private Funcionario ConverterParFuncionario(SqlDataReader leitorFuncionario)
         {
-            int id = Convert.ToInt32(leitorPaciente["ID"]);
-            string nome = Convert.ToString(leitorPaciente["NOME"]);
-            string login = Convert.ToString(leitorPaciente["LOGIN"]);
-            string senha = Convert.ToString(leitorPaciente["SENHA"]);
+            int id = Convert.ToInt32(leitorFuncionario["ID"]);
+            string nome = Convert.ToString(leitorFuncionario["NOME"]);
+            string login = Convert.ToString(leitorFuncionario["LOGIN"]);
+            string senha = Convert.ToString(leitorFuncionario["SENHA"]);
 
             return new Funcionario()
             {
