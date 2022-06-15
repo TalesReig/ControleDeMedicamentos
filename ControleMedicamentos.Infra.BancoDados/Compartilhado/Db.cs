@@ -9,7 +9,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Compartilhado
 {
     public static class Db
     {
-        private static string enderecoBanco = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False";
+        private const string enderecoBanco = @"Data Source=(LOCALDB)\MSSQLLOCALDB;Initial Catalog=ControleMedicamentosDB;Integrated Security=True";
 
         public static void ExecutarSql(string sql)
         {

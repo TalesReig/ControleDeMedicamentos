@@ -6,7 +6,7 @@
         {
         }
 
-        public Fornecedor(string nome, string telefone, string email, string cidade, string estado)
+        public Fornecedor(string nome, string telefone, string email, string cidade, string estado) : this()
         {
             Nome = nome;
             Telefone = telefone;

@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 
 namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
 {
-    internal class RepositorioFornecedorEmBancoDados
+    public class RepositorioFornecedorEmBancoDados
     {
-        private const string enderecoBanco = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False";
-
+        private const string enderecoBanco = @"Data Source=(LOCALDB)\MSSQLLOCALDB;Initial Catalog=ControleMedicamentosDB;Integrated Security=True";
         #region Querry's
         private const string sqlInserir =
             @"INSERT INTO [TBFORNECEDOR]
@@ -49,7 +48,8 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
 			                [ID] = @ID";
 
         private const string sqlSelecionarTodos =
-            @"SELECT 
+            @"SELECT
+                    [ID],
                     [NOME],
                     [TELEFONE],
                     [EMAIL],
@@ -60,6 +60,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
 
         private const string sqlSelecionarPorId =
             @"SELECT 
+                    [ID],
                     [NOME],
                     [TELEFONE],
                     [EMAIL],
@@ -72,7 +73,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
 
         #endregion
 
-        public ValidationResult Insert(Fornecedor novoFornecedor)
+        public ValidationResult Inserir(Fornecedor novoFornecedor)
         {
             var validador = new FornecedorValidator();
             var resultadoValidacao = validador.Validate(novoFornecedor);
@@ -143,7 +144,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
             List<Fornecedor> pacientes = new List<Fornecedor>();
 
             while (leitorPaciente.Read())
-                pacientes.Add(ConverterParFuncionario(leitorPaciente));
+                pacientes.Add(ConverterParFornecedor(leitorPaciente));
 
             conexaoComBanco.Close();
 
@@ -159,11 +160,11 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
             comandoSelecao.Parameters.AddWithValue("ID", id);
 
             conexaoComBanco.Open();
-            SqlDataReader leitorFuncionario = comandoSelecao.ExecuteReader();
+            SqlDataReader leitorFornecedor = comandoSelecao.ExecuteReader();
 
             Fornecedor fornecedor = null;
-            if (leitorFuncionario.Read())
-                fornecedor = ConverterParFuncionario(leitorFuncionario);
+            if (leitorFornecedor.Read())
+                fornecedor = ConverterParFornecedor(leitorFornecedor);
 
             conexaoComBanco.Close();
 
@@ -175,22 +176,26 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
             comandoInsercao.Parameters.AddWithValue("ID", novoFornecedor.Id);
             comandoInsercao.Parameters.AddWithValue("NOME", novoFornecedor.Nome);
             comandoInsercao.Parameters.AddWithValue("EMAIL", novoFornecedor.Email);
+            comandoInsercao.Parameters.AddWithValue("TELEFONE", novoFornecedor.Telefone);
             comandoInsercao.Parameters.AddWithValue("CIDADE", novoFornecedor.Cidade);
             comandoInsercao.Parameters.AddWithValue("ESTADO", novoFornecedor.Estado);
         }
 
-        private Fornecedor ConverterParFuncionario(SqlDataReader leitorPaciente)
+        private Fornecedor ConverterParFornecedor(SqlDataReader leitorFornecedor)
         {
-            int id = Convert.ToInt32(leitorPaciente["ID"]);
-            string nome = Convert.ToString(leitorPaciente["NOME"]);
-            string login = Convert.ToString(leitorPaciente["EMAIL"]);
-            string cidade = Convert.ToString(leitorPaciente["CIDADE"]);
-            string estado = Convert.ToString(leitorPaciente["CIDADE"]);
+            int id = Convert.ToInt32(leitorFornecedor["ID"]);
+            string nome = Convert.ToString(leitorFornecedor["NOME"]);
+            string login = Convert.ToString(leitorFornecedor["EMAIL"]);
+            string fone = Convert.ToString(leitorFornecedor["TELEFONE"]);
+            string cidade = Convert.ToString(leitorFornecedor["CIDADE"]);
+            string estado = Convert.ToString(leitorFornecedor["CIDADE"]);
 
             return new Fornecedor()
             {
                 Id = id,
                 Nome = nome,
+                Email = login,
+                Telefone = fone,
                 Cidade = cidade,
                 Estado = estado
             };

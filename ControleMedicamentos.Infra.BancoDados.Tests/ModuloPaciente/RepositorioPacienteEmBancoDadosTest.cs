@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
 {
     [TestClass]
-    internal class RepositorioPacienteEmBancoDadosTest
+    public class RepositorioPacienteEmBancoDadosTest
     {
         private Paciente paciente;
         private RepositorioPacienteEmBancoDados repositorio;
@@ -36,7 +36,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
             var pacienteEncontrado = repositorio.SelecionarPorId(paciente.Id);
 
             Assert.IsNotNull(pacienteEncontrado);
-            Assert.AreEqual(paciente, pacienteEncontrado);
+            Assert.AreEqual(paciente.Nome, pacienteEncontrado.Nome);
         }
 
         [TestMethod]
@@ -54,7 +54,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
             var pacienteEncontrado = repositorio.SelecionarPorId(paciente.Id);
 
             Assert.IsNotNull(pacienteEncontrado);
-            Assert.AreEqual(paciente, pacienteEncontrado);
+            Assert.AreEqual(paciente.Nome, pacienteEncontrado.Nome);
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
 
             //assert
             Assert.IsNotNull(pacienteEncontrado);
-            Assert.AreEqual(paciente, pacienteEncontrado);
+            Assert.AreEqual(paciente.Nome, pacienteEncontrado.Nome);
         }
 
         [TestMethod]

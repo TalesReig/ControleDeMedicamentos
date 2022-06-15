@@ -11,7 +11,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFuncionario
 {
     internal class RepositorioFuncionarioEmBancoDados
     {
-        private const string enderecoBanco = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False";
+        private const string enderecoBanco = @"Data Source=(LOCALDB)\MSSQLLOCALDB;Initial Catalog=ControleMedicamentosDB;Integrated Security=True";
 
         #region Querry's
         private const string sqlInserir =

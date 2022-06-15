@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace ControleMedicamentos.Dominio.ModuloMedicamento
 {
     public class Medicamento : EntidadeBase<Medicamento>
-    {        
+    {
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public string Lote { get; set; }
@@ -15,11 +15,11 @@ namespace ControleMedicamentos.Dominio.ModuloMedicamento
 
         public List<Requisicao> Requisicoes { get; set; }
 
-        public Fornecedor Fornecedor{ get; set; }
+        public Fornecedor Fornecedor { get; set; }
 
         public int QuantidadeRequisicoes { get { return Requisicoes.Count; } }
 
-        public Medicamento(string nome, string descricao, string lote, DateTime validade)
+        public Medicamento(string nome, string descricao, string lote, DateTime validade) : this()
         {
             Nome = nome;
             Descricao = descricao;
@@ -28,5 +28,17 @@ namespace ControleMedicamentos.Dominio.ModuloMedicamento
             Requisicoes = new List<Requisicao>();
         }
 
+        public Medicamento()
+        {
+
+        }
+
+        public void ConfigurarFornecedor(Fornecedor fornecedor)
+        {
+            if (fornecedor == null)
+                return;
+
+            Fornecedor = fornecedor;
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloPaciente
 {
     public class RepositorioPacienteEmBancoDados
     {
-        private const string enderecoBanco = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False";
+        private const string enderecoBanco = @"Data Source=(LOCALDB)\MSSQLLOCALDB;Initial Catalog=ControleMedicamentosDB;Integrated Security=True";
 
         #region Querry's
 
@@ -33,12 +33,12 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloPaciente
                     [NOME] = @NOME,
                     [CARTAOSUS] = @CARTAOSUS
                 WHERE 
-                    [ID] = @ID";
+                    [ID] = @ID;";
 
         private const string sqlExcluir =
             @"DELETE FROM [TBPACIENTE]
 		        WHERE
-			        [ID] = @ID";
+			        [ID] = @ID;";
 
         private const string sqlSelecionarTodos =
             @"SELECT 
@@ -56,7 +56,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloPaciente
 	            FROM 
 		            [TBPACIENTE]
 		        WHERE
-                    [ID] = @ID";
+                    [ID] = @ID;";
         #endregion
 
         public ValidationResult Inserir(Paciente novoPaciente)
