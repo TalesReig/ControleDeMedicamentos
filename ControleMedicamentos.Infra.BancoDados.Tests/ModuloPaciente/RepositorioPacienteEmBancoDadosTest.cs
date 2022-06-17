@@ -36,7 +36,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
             var pacienteEncontrado = repositorio.SelecionarPorId(paciente.Id);
 
             Assert.IsNotNull(pacienteEncontrado);
-            Assert.AreEqual(paciente.Nome, pacienteEncontrado.Nome);
+            Assert.AreEqual(paciente, pacienteEncontrado);
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
 
             //assert
             Assert.IsNotNull(pacienteEncontrado);
-            Assert.AreEqual(paciente.Nome, pacienteEncontrado.Nome);
+            Assert.AreEqual(paciente, pacienteEncontrado);
         }
 
         [TestMethod]
@@ -104,9 +104,9 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
 
             Assert.AreEqual(3, pacientes.Count);
 
-            Assert.AreEqual(p01.Nome, pacientes[0].Nome);
-            Assert.AreEqual(p02.Nome, pacientes[1].Nome);
-            Assert.AreEqual(p03.Nome, pacientes[2].Nome);
+            Assert.AreEqual(p01, pacientes[0]);
+            Assert.AreEqual(p02, pacientes[1]);
+            Assert.AreEqual(p03, pacientes[2]);
         }
     }
 }

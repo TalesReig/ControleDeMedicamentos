@@ -4,8 +4,15 @@ namespace ControleMedicamentos.Dominio.ModuloFornecedor
 {
     public class Fornecedor : EntidadeBase<Fornecedor>
     {
+        private int v;
+
         public Fornecedor()
         {
+        }
+
+        public Fornecedor(int id)
+        {
+            this.Id = id;
         }
 
         public Fornecedor(string nome, string telefone, string email, string cidade, string estado) : this()

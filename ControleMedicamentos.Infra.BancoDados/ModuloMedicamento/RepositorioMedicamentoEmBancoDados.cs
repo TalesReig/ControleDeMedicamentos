@@ -20,7 +20,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
                     [LOTE],
                     [VALIDADE],
                     [QUANTIDADEDISPONIVEL],
-                    [FORNCEDOR_ID]
+                    [FORNECEDOR_ID]
 	            )
 	            VALUES
                 (
@@ -29,7 +29,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
                     @LOTE,
                     @VALIDADE,
                     @QUANTIDADEDISPONIVEL,
-                    @FORNCEDOR_ID
+                    @FORNECEDOR_ID
                 );SELECT SCOPE_IDENTITY();";
 
         private const string sqlEditar =
@@ -40,7 +40,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
                         [LOTE] = @LOTE,
                         [VALIDADE] = @VALIDADE,
                         [QUANTIDADEDISPONIVEL] = @QUANTIDADEDISPONIVEL,
-                        [FORNCEDOR_ID] = @FORNCEDOR_ID
+                        [FORNECEDOR_ID] = @FORNECEDOR_ID
 		            WHERE
 			            [ID] = @ID";
 
@@ -62,7 +62,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
                   FROM 
                 	TBMEDICAMENTO TBM INNER JOIN TBFORNECEDOR TBF 
                   ON
-                	TBM.FORNCEDOR_ID = TBF.ID";
+                	TBM.FORNECEDOR_ID = TBF.ID";
 
         private const string sqlSelecionarPorNumero =
            @"SELECT 
@@ -77,7 +77,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
                   FROM 
                 	TBMEDICAMENTO TBM INNER JOIN TBFORNECEDOR TBF 
                   ON
-                	TBM.FORNCEDOR_ID = TBF.ID
+                	TBM.FORNECEDOR_ID = TBF.ID
                 WHERE 
                     TBM.ID = @ID";
 
@@ -188,7 +188,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
             DateTime validade = Convert.ToDateTime(leitorMedicamento["VALIDADE"]);
             int quantidadeDisponivel = Convert.ToInt32(leitorMedicamento["QUANTIDADEDISPONIVEL"]);
 
-            int numeroFornecedor = Convert.ToInt32(leitorMedicamento["FORNCEDOR_ID"]);
+            int numeroFornecedor = Convert.ToInt32(leitorMedicamento["FORNECEDOR_ID"]);
             string nomeFornecedor = Convert.ToString(leitorMedicamento["FORNECEDOR_NOME"]);
 
             var fornecedor = new Fornecedor
@@ -220,7 +220,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
             comandoInsercao.Parameters.AddWithValue("LOTE", novoMedicamente.Lote);
             comandoInsercao.Parameters.AddWithValue("VALIDADE", novoMedicamente.Validade);
             comandoInsercao.Parameters.AddWithValue("QUANTIDADEDISPONIVEL", novoMedicamente.QuantidadeDisponivel);
-            comandoInsercao.Parameters.AddWithValue("FORNCEDOR_ID", novoMedicamente.Fornecedor.Id);
+            comandoInsercao.Parameters.AddWithValue("FORNECEDOR_ID", novoMedicamente.Fornecedor.Id);
         }
     }
 }

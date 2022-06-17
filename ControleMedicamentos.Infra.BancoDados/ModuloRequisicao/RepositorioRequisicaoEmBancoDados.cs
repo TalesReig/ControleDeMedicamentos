@@ -14,7 +14,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloRequisicao
         private const string enderecoBanco = @"Data Source=(LOCALDB)\MSSQLLOCALDB;Initial Catalog=ControleMedicamentosDB;Integrated Security=True";
 
         private const string sqlInserir =
-         @"INSERT INTO [TBRequisicao]
+          @"INSERT INTO [TBRequisicao]
                 (
                     [FUNCIONARIO_ID],                    
                     [PACIENTE_ID],
@@ -64,7 +64,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloRequisicao
                      ,TBM.VALIDADE
                  
                  FROM 
-                    TBREQUISICAO TBR INNER JOIN TBFORNECEDOR TBF 
+                    TBREQUISICAO TBR INNER JOIN TBFUNCIONARIO TBF 
                  ON
                     TBF.ID = TBR.FUNCIONARIO_ID INNER JOIN TBPACIENTE TBP
                  ON
@@ -87,7 +87,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloRequisicao
                      ,TBM.VALIDADE
                  
                  FROM 
-                    TBREQUISICAO TBR INNER JOIN TBFORNECEDOR TBF 
+                    TBREQUISICAO TBR INNER JOIN TBFUNCIONARIO TBF 
                  ON
                     TBF.ID = TBR.FUNCIONARIO_ID INNER JOIN TBPACIENTE TBP
                  ON
@@ -190,7 +190,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloRequisicao
 
         private void ConfigurarParametrosRequisicao(Requisicao riquisicao, SqlCommand comando)
         {
-            comando.Parameters.AddWithValue("Id", riquisicao.Id);
+            comando.Parameters.AddWithValue("ID", riquisicao.Id);
             comando.Parameters.AddWithValue("QUANTIDADEMEDICAMENTO", riquisicao.QtdMedicamento);
             comando.Parameters.AddWithValue("DATA", riquisicao.Data);
             comando.Parameters.AddWithValue("FUNCIONARIO_ID", riquisicao.Funcionario.Id);
@@ -200,7 +200,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloRequisicao
 
         private Requisicao ConverterParaRiquisicao(SqlDataReader leitorRequisicao)
         {
-            int Id = Convert.ToInt32(leitorRequisicao["Id"]);
+            int Id = Convert.ToInt32(leitorRequisicao["ID"]);
             int qtdMedicamento = Convert.ToInt32(leitorRequisicao["QUANTIDADEMEDICAMENTO"]);
             DateTime data = Convert.ToDateTime(leitorRequisicao["DATA"]);
 

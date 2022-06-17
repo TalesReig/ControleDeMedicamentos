@@ -34,7 +34,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFuncionamento
             var funcionarioEncontrado = repositorio.SelecionarPorId(funcionario.Id);
 
             Assert.IsNotNull(funcionarioEncontrado);
-            Assert.AreEqual(funcionario.Nome, funcionarioEncontrado.Nome);
+            Assert.AreEqual(funcionario, funcionarioEncontrado);
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFuncionamento
             var funcionarioEncontrado = repositorio.SelecionarPorId(funcionario.Id);
 
             Assert.IsNotNull(funcionarioEncontrado);
-            Assert.AreEqual(funcionario.Nome, funcionarioEncontrado.Nome);
+            Assert.AreEqual(funcionario, funcionarioEncontrado);
         }
 
         [TestMethod]
@@ -78,7 +78,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFuncionamento
 
             //assert
             Assert.IsNotNull(funcionarioEncontrado);
-            Assert.AreEqual(funcionario.Nome, funcionarioEncontrado.Nome);
+            Assert.AreEqual(funcionario, funcionarioEncontrado);
         }
 
         [TestMethod]
@@ -101,9 +101,9 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFuncionamento
 
             Assert.AreEqual(3, funcionarios.Count);
 
-            Assert.AreEqual(p01.Nome, funcionarios[0].Nome);
-            Assert.AreEqual(p02.Nome, funcionarios[1].Nome);
-            Assert.AreEqual(p03.Nome, funcionarios[2].Nome);
+            Assert.AreEqual(p01, funcionarios[0]);
+            Assert.AreEqual(p02, funcionarios[1]);
+            Assert.AreEqual(p03, funcionarios[2]);
         }
     }
 }
